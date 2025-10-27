@@ -1,7 +1,10 @@
 ### _16.22 Informática Médica_
 
+<p align="center">
+  <img src="imagenes/logo.png" width="350">
+</p>
+
 # Trabajo Práctico N°4: Bases de Datos + Manejo de Versiones
-VER DE AGREGAR IMG ITBA
 
 ## Grupo 5
 ## Integrantes
@@ -12,13 +15,18 @@ VER DE AGREGAR IMG ITBA
 ## **Parte 1:** Base de Datos
 
 ### 1. ¿Qué tipo de base de datos es?
- Respuesta
+Según su estructura, es una base de datos relacional. Según su función, es una base de datos transaccional, ya que registra transacciones cotidianas (registro de recetas, alta de pacientes, etc.), y tiene como objetivo permitir consultas frecuentes y rápidas sobre datos actualizados.
 
 ### 2. Armar el diagrama entidad-relación de la base de datos dada.
 
+![DER](imagenes/TP4_Infomed_G5_DER.jpg)
+
 ### 3. Armar el Modelo relacional de la base de datos dada.
 
+![Mapeo](imagenes/TP4_Infomed_G5_Mapeo.jpg)
+
 ### 4. Considera que la base de datos está normalizada. En caso que no lo esté, ¿cómo podría hacerlo?
+La base de datos está normalizada hasta la 3FN, ya que todos los atributos son atómicos (1FN, no hay listas ni datos concatenados), todos los atributos dependen de la clave primaria (2FN) y no hay dependencias transitivas de atributos clave con respecto a la clave primaria (3FN).
 
 ## **PARTE 2:** SQL
 
@@ -28,6 +36,7 @@ VER DE AGREGAR IMG ITBA
 create index idx_pacientes_ciudad 
 on Pacientes(ciudad);
 ```
+![Resultado query 1](imagenes/01_output.png)
 
 ### 2. Se tiene la fecha de nacimiento de los pacientes. Se desea calcular la edad de los pacientes y almacenarla de forma dinámica en el sistema ya que es un valor típicamente consultado, junto con otra información relevante del paciente.
 
@@ -41,6 +50,7 @@ select
     numero, calle, ciudad, id_sexo
     from pacientes;
 ```
+![Resultado query 2](imagenes/02_output.png)
 
 ### 3. La paciente, “Luciana Gómez”, ha cambiado de dirección. Antes vivía en “Avenida Las Heras 121” en “Buenos Aires”, pero ahora vive en “Calle Corrientes 500” en “Buenos Aires”. Actualizar la dirección de este paciente en la base de datos.
 ```
@@ -48,6 +58,7 @@ update pacientes
 set calle='Calle Corrientes', numero=500
 where id_paciente=1;
 ```
+![Resultado query 3](imagenes/03_output.png)
 
 ### 4. Seleccionar el nombre y la matrícula de cada médico cuya especialidad sea identificada por el id 4.
 ```
@@ -55,6 +66,7 @@ select nombre, matricula
 from medicos
 where especialidad_id=4;
 ```
+![Resultado query 4](imagenes/04_output.png)
 
 ### 5. Puede pasar que haya inconsistencias en la forma en la que están escritos los nombres de las ciudades, ¿cómo se corrige esto? Agregar la query correspondiente.
 ```
@@ -75,6 +87,7 @@ when lower (SUBSTRING(trim(ciudad),1,1)) = 's' then 'Santa Fe'
 else 'Rosario'
 end;
 ```
+![Resultado query 5](imagenes/05_output.png)
 
 ### 6. Obtener el nombre y la dirección de los pacientes que viven en Buenos Aires.
 ```
@@ -82,6 +95,7 @@ select nombre, calle, numero
 from pacientes 
 where ciudad='Buenos Aires';
 ```
+![Resultado query 6](imagenes/06_output.png)
 
 ### 7. Cantidad de pacientes que viven en cada ciudad.
 ```
@@ -89,6 +103,7 @@ SELECT ciudad, COUNT(id_paciente) AS "Cantidad de pacientes"
 FROM Pacientes
 GROUP BY ciudad;
 ```
+![Resultado query 7](imagenes/07_output.png)
 
 ### 8. Cantidad de pacientes por sexo que viven en cada ciudad.
 ```
@@ -101,6 +116,7 @@ JOIN SexoBiologico s ON p.id_sexo = s.id_sexo
 GROUP BY p.ciudad, s.descripcion
 ORDER BY p.ciudad, s.descripcion;
 ```
+![Resultado query 8](imagenes/08_output.png)
 
 ### 9. Obtener la cantidad de recetas emitidas por cada médico.
 ```
@@ -113,6 +129,7 @@ JOIN Medicos m          -- m = Medicos
 GROUP BY m.nombre
 ORDER BY "Cantidad de recetas" DESC;
 ```
+![Resultado query 9](imagenes/09_output.png)
 
 ### 10. Obtener todas las consultas médicas realizadas por el médico con ID igual a 3 durante el mes de agosto de 2024.
 ```
@@ -123,6 +140,7 @@ WHERE id_medico = 3
   AND fecha < '2024-09-01'
 ORDER BY fecha;
 ```
+![Resultado query 10](imagenes/10_output.png)
 
 ### 11. Obtener el nombre de los pacientes junto con la fecha y el diagnóstico de todas las consultas médicas realizadas en agosto del 2024.
 ```
@@ -136,6 +154,7 @@ WHERE c.fecha >= '2024-08-01'
   AND c.fecha < '2024-09-01'
 ORDER BY c.fecha;
 ```
+![Resultado query 11](imagenes/11_output.png)
 
 ### 12. Obtener el nombre de los medicamentos prescritos más de una vez por el médico con ID igual a 2.
 ```
@@ -150,6 +169,7 @@ GROUP BY med.nombre
 HAVING COUNT(*) > 1
 ORDER BY veces_prescripto DESC, med.nombre;
 ```
+![Resultado query 12](imagenes/12_output.png)
 
 ### 13. Obtener el nombre de los pacientes junto con la cantidad total de recetas que han recibido.
 ```
@@ -162,6 +182,7 @@ LEFT JOIN Recetas r
 GROUP BY p.nombre
 ORDER BY cantidad_recetas DESC, p.nombre;
 ```
+![Resultado query 13](imagenes/13_output.png)
 
 ### 14. Obtener el nombre del medicamento más recetado junto con la cantidad de recetas emitidas para ese medicamento.
 ```
@@ -174,6 +195,7 @@ GROUP BY med.nombre
 ORDER BY total_recetas DESC, med.nombre
 FETCH FIRST 1 ROW WITH TIES;
 ```
+![Resultado query 14](imagenes/14_output.png)
 
 ### 15. Obtener el nombre del paciente junto con la fecha de su última consulta y el diagnóstico asociado.
 ```
@@ -192,6 +214,7 @@ JOIN Consultas c
  AND c.fecha       = m.max_fecha
 ORDER BY p.nombre;
 ```
+![Resultado query 15](imagenes/15_output.png)
 
 ### 16. Obtener el nombre del médico junto con el nombre del paciente y el número total de consultas realizadas por cada médico para cada paciente, ordenado por médico y paciente.
 ```
@@ -205,6 +228,7 @@ JOIN Pacientes p ON p.id_paciente = c.id_paciente
 GROUP BY m.nombre, p.nombre
 ORDER BY total_consultas DESC, m.nombre, p.nombre;
 ```
+![Resultado query 16](imagenes/16_output.png)
 
 ### 17. Obtener el nombre del medicamento junto con el total de recetas prescritas para ese medicamento, el nombre del médico que lo recetó y el nombre del paciente al que se le recetó, ordenado por total de recetas en orden descendente.
 ```
@@ -224,6 +248,7 @@ JOIN (
 ) t ON t.id_medicamento = r.id_medicamento
 ORDER BY t.total_recetas_medicamento DESC, med.nombre, m.nombre, p.nombre
 ```
+![Resultado query 17](imagenes/17_output.png)
 
 ### 18. Obtener el nombre del médico junto con el total de pacientes a los que ha atendido, ordenado por el total de pacientes en orden descendente.
 ```
@@ -235,3 +260,4 @@ JOIN Medicos m ON m.id_medico = c.id_medico
 GROUP BY m.nombre
 ORDER BY cantidad_pacientes_distintos DESC, m.nombre;
 ```
+![Resultado query 18](imagenes/18_output.png)
