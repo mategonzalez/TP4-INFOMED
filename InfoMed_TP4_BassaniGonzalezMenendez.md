@@ -19,12 +19,12 @@ Según su estructura, es una base de datos relacional. Según su función, es un
 
 ### 2. Armar el diagrama entidad-relación de la base de datos dada.
 <p align="center">
-  <img src="imagenes/TP4_Infomed_G5_DER.png">
+  <img src="imagenes/TP4_Infomed_G5_DER.jpg">
 </p>
 
 ### 3. Armar el Modelo relacional de la base de datos dada.
 <p align="center">
-  <img src="imagenes/TP4_Infomed_G5_Mapeo.png">
+  <img src="imagenes/TP4_Infomed_G5_Mapeo.jpg">
 </p>
 
 ### 4. Considera que la base de datos está normalizada. En caso que no lo esté, ¿cómo podría hacerlo?
