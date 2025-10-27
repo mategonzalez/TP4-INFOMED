@@ -20,7 +20,7 @@ VER DE AGREGAR IMG ITBA
 
 ### 4. Considera que la base de datos está normalizada. En caso que no lo esté, ¿cómo podría hacerlo?
 
-## **PARTE 2:** Bases de Datos
+## **PARTE 2:** SQL
 
 ### 1. Cuando se realizan consultas sobre la tabla paciente agrupando por ciudad los tiempos de respuesta son demasiado largos. Proponer mediante una query SQL una solución a este problema.
 
