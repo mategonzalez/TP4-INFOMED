@@ -18,14 +18,12 @@
 Según su estructura, es una base de datos relacional. Según su función, es una base de datos transaccional, ya que registra transacciones cotidianas (registro de recetas, alta de pacientes, etc.), y tiene como objetivo permitir consultas frecuentes y rápidas sobre datos actualizados.
 
 ### 2. Armar el diagrama entidad-relación de la base de datos dada.
-<p align="center">
-  <img src="imagenes/TP4_Infomed_G5_DER.jpg">
-</p>
+
+![DER](imagenes/TP4_Infomed_G5_DER.jpg)
 
 ### 3. Armar el Modelo relacional de la base de datos dada.
-<p align="center">
-  <img src="imagenes/TP4_Infomed_G5_Mapeo.jpg">
-</p>
+
+![Mapeo](imagenes/TP4_Infomed_G5_Mapeo.jpg)
 
 ### 4. Considera que la base de datos está normalizada. En caso que no lo esté, ¿cómo podría hacerlo?
 La base de datos está normalizada hasta la 3FN, ya que todos los atributos son atómicos (1FN, no hay listas ni datos concatenados), todos los atributos dependen de la clave primaria (2FN) y no hay dependencias transitivas de atributos clave con respecto a la clave primaria (3FN).
