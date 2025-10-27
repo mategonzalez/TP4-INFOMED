@@ -1,4 +1,4 @@
-SELECT
+SELECT 
   p.nombre AS paciente,
   COUNT(r.id_receta) AS cantidad_recetas
 FROM Pacientes p

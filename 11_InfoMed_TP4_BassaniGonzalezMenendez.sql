@@ -1,4 +1,4 @@
-SELECT 
+SELECT
     p.nombre AS paciente,
     c.fecha,
     c.diagnostico
