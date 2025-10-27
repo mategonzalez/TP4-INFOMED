@@ -1,4 +1,4 @@
-SELECT
+SELECT 
   med.nombre AS medicamento,
   COUNT(*)   AS veces_prescripto
 FROM Recetas r
