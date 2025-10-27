@@ -9,32 +9,27 @@ VER DE AGREGAR IMG ITBA
 * González, Mateo Ezequiel (63396)
 * Menendez Cortona, Paloma (63070)
 
-  ## **Parte 1:** Base de Datos
+## **Parte 1:** Base de Datos
 
-  ### 1. ¿Qué tipo de base de datos es?
+### 1. ¿Qué tipo de base de datos es?
+ Respuesta
 
-  Respuesta
+### 2. Armar el diagrama entidad-relación de la base de datos dada.
 
-  ### 2. Armar el diagrama entidad-relación de la base de datos dada.
+### 3. Armar el Modelo relacional de la base de datos dada.
 
-  ### 3. Armar el Modelo relacional de la base de datos dada.
-
-  ### 4. Considera que la base de datos está normalizada. En caso que no lo esté, ¿cómo podría hacerlo?
+### 4. Considera que la base de datos está normalizada. En caso que no lo esté, ¿cómo podría hacerlo?
 
 ## **PARTE 2:** Bases de Datos
 
-### 1. Cuando se realizan consultas sobre la tabla paciente agrupando por ciudad los
-tiempos de respuesta son demasiado largos. Proponer mediante una query SQL una
-solución a este problema.
+### 1. Cuando se realizan consultas sobre la tabla paciente agrupando por ciudad los tiempos de respuesta son demasiado largos. Proponer mediante una query SQL una solución a este problema.
 
 ```
 create index idx_pacientes_ciudad 
 on Pacientes(ciudad);
 ```
 
-### 2. Se tiene la fecha de nacimiento de los pacientes. Se desea calcular la edad de los
-pacientes y almacenarla de forma dinámica en el sistema ya que es un valor
-típicamente consultado, junto con otra información relevante del paciente.
+### 2. Se tiene la fecha de nacimiento de los pacientes. Se desea calcular la edad de los pacientes y almacenarla de forma dinámica en el sistema ya que es un valor típicamente consultado, junto con otra información relevante del paciente.
 
 ```
 create or replace View PacientesConEdad AS
@@ -47,25 +42,21 @@ select
     from pacientes;
 ```
 
-### 3. La paciente, “Luciana Gómez”, ha cambiado de dirección. Antes vivía en “Avenida
-Las Heras 121” en “Buenos Aires”, pero ahora vive en “Calle Corrientes 500” en
-“Buenos Aires”. Actualizar la dirección de este paciente en la base de datos.
+### 3. La paciente, “Luciana Gómez”, ha cambiado de dirección. Antes vivía en “Avenida Las Heras 121” en “Buenos Aires”, pero ahora vive en “Calle Corrientes 500” en “Buenos Aires”. Actualizar la dirección de este paciente en la base de datos.
 ```
 update pacientes
 set calle='Calle Corrientes', numero=500
 where id_paciente=1;
 ```
 
-### 4. Seleccionar el nombre y la matrícula de cada médico cuya especialidad sea
-identificada por el id 4.
+### 4. Seleccionar el nombre y la matrícula de cada médico cuya especialidad sea identificada por el id 4.
 ```
 select nombre, matricula
 from medicos
 where especialidad_id=4;
 ```
 
-### 5. Puede pasar que haya inconsistencias en la forma en la que están escritos los
-nombres de las ciudades, ¿cómo se corrige esto? Agregar la query correspondiente.
+### 5. Puede pasar que haya inconsistencias en la forma en la que están escritos los nombres de las ciudades, ¿cómo se corrige esto? Agregar la query correspondiente.
 ```
 select *, CASE
 when lower (SUBSTRING(trim(ciudad),1,1)) = 'b' then 'Buenos Aires'
@@ -123,8 +114,7 @@ GROUP BY m.nombre
 ORDER BY "Cantidad de recetas" DESC;
 ```
 
-### 10. Obtener todas las consultas médicas realizadas por el médico con ID igual a 3
-durante el mes de agosto de 2024.
+### 10. Obtener todas las consultas médicas realizadas por el médico con ID igual a 3 durante el mes de agosto de 2024.
 ```
 SELECT *
 FROM Consultas
@@ -134,8 +124,7 @@ WHERE id_medico = 3
 ORDER BY fecha;
 ```
 
-### 11. Obtener el nombre de los pacientes junto con la fecha y el diagnóstico de todas las
-consultas médicas realizadas en agosto del 2024.
+### 11. Obtener el nombre de los pacientes junto con la fecha y el diagnóstico de todas las consultas médicas realizadas en agosto del 2024.
 ```
 SELECT 
     p.nombre AS paciente,
@@ -148,8 +137,7 @@ WHERE c.fecha >= '2024-08-01'
 ORDER BY c.fecha;
 ```
 
-### 12. Obtener el nombre de los medicamentos prescritos más de una vez por el médico
-con ID igual a 2.
+### 12. Obtener el nombre de los medicamentos prescritos más de una vez por el médico con ID igual a 2.
 ```
 SELECT
   med.nombre AS medicamento,
@@ -163,8 +151,7 @@ HAVING COUNT(*) > 1
 ORDER BY veces_prescripto DESC, med.nombre;
 ```
 
-### 13. Obtener el nombre de los pacientes junto con la cantidad total de recetas que han
-recibido.
+### 13. Obtener el nombre de los pacientes junto con la cantidad total de recetas que han recibido.
 ```
 SELECT
   p.nombre AS paciente,
@@ -176,8 +163,7 @@ GROUP BY p.nombre
 ORDER BY cantidad_recetas DESC, p.nombre;
 ```
 
-### 14. Obtener el nombre del medicamento más recetado junto con la cantidad de recetas
-emitidas para ese medicamento.
+### 14. Obtener el nombre del medicamento más recetado junto con la cantidad de recetas emitidas para ese medicamento.
 ```
 SELECT 
   med.nombre AS medicamento,
@@ -189,8 +175,7 @@ ORDER BY total_recetas DESC, med.nombre
 FETCH FIRST 1 ROW WITH TIES;
 ```
 
-### 15. Obtener el nombre del paciente junto con la fecha de su última consulta y el
-diagnóstico asociado.
+### 15. Obtener el nombre del paciente junto con la fecha de su última consulta y el diagnóstico asociado.
 ```
 SELECT
   p.nombre AS paciente,
@@ -208,9 +193,7 @@ JOIN Consultas c
 ORDER BY p.nombre;
 ```
 
-### 16. Obtener el nombre del médico junto con el nombre del paciente y el número total de
-consultas realizadas por cada médico para cada paciente, ordenado por médico y
-paciente.
+### 16. Obtener el nombre del médico junto con el nombre del paciente y el número total de consultas realizadas por cada médico para cada paciente, ordenado por médico y paciente.
 ```
 SELECT 
   m.nombre   AS medico,
@@ -223,9 +206,7 @@ GROUP BY m.nombre, p.nombre
 ORDER BY total_consultas DESC, m.nombre, p.nombre;
 ```
 
-### 17. Obtener el nombre del medicamento junto con el total de recetas prescritas para ese
-medicamento, el nombre del médico que lo recetó y el nombre del paciente al que se
-le recetó, ordenado por total de recetas en orden descendente.
+### 17. Obtener el nombre del medicamento junto con el total de recetas prescritas para ese medicamento, el nombre del médico que lo recetó y el nombre del paciente al que se le recetó, ordenado por total de recetas en orden descendente.
 ```
 SELECT
   med.nombre AS medicamento,
@@ -244,8 +225,7 @@ JOIN (
 ORDER BY t.total_recetas_medicamento DESC, med.nombre, m.nombre, p.nombre
 ```
 
-### 18. Obtener el nombre del médico junto con el total de pacientes a los que ha atendido,
-ordenado por el total de pacientes en orden descendente.
+### 18. Obtener el nombre del médico junto con el total de pacientes a los que ha atendido, ordenado por el total de pacientes en orden descendente.
 ```
 SELECT
   m.nombre AS medico,
